@@ -14,6 +14,9 @@ class Pacman{
     constructor(){
         this.x = 0;
         this.y = 0;
+        this.size = blockSize;
+
+
         this.vX = 0;
         this.vY = 0;
         this.nextvX = 0;
@@ -24,6 +27,7 @@ class Pacman{
         this.mouthCount = 0;
         this.mouthIncrement = 0.1;
         this.mouthAngleMax = Math.PI/2;
+        
     }
 
     tick(){
@@ -72,4 +76,22 @@ class Pacman{
         this.vX = xDir * this.maxVelocity;
         this.vY = yDir * this.maxVelocity;
     }
+
+    isOn(obj){ // obj must have an x, y, and a sizeX, and a sizeY
+
+        // checks all four corner of the grid-based object
+        for(let i = 0; i <= 1; i++){
+            for(let j = 0; j <= 1; j++){
+                let currentX = obj.x + obj.sizeX * i;
+                let currentY = obj.y + obj.sizeY * i;
+                if(this.x <= currentX && currentX <= this.x + this.size &&
+                    this.y <= currentY && currentY <= this.y + this.size){
+                        return true;
+                    }
+            }
+        }
+
+        return false;
+    }
+
 }

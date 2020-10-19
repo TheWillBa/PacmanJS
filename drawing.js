@@ -12,9 +12,17 @@ function drawGame(game) {
     ctx.font = "30px Arial";
     ctx.fillText(game.points,xOffset + gridWidthRaw/2, yOffset/1.5);
 
+    drawBoard(game.board);
     drawPacman(game.pacman);
+
   
   
+  }
+
+  function drawBoard(b){
+    for(let p of b.pellets){
+      drawPellet(p);
+    }
   }
 
 
@@ -40,6 +48,15 @@ function drawGame(game) {
       + man.vY * Math.PI/4
       + xRot);
     ctx.lineTo(cX,cY);
+    ctx.fill();
+  }
+
+
+  function drawPellet(p){
+    let pelletSize = blockSize/8;
+    ctx.beginPath();
+    ctx.fillStyle = "yellow";
+    ctx.rect(p.x, p.y, pelletSize, pelletSize);
     ctx.fill();
   }
   
