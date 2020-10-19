@@ -11,9 +11,9 @@
  */
 
 class Pacman{
-    constructor(){
-        this.x = 0;
-        this.y = 0;
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
         this.size = blockSize;
 
 
@@ -30,8 +30,19 @@ class Pacman{
         
     }
 
-    tick(){
-        this.move();
+    tick(game){
+        if(this.canMove(game.board)){
+            this.move();
+        }
+    }
+
+    canMove(board){
+        let nextMan = new Pacman(this.x + this.vX, this.y + this.vY);
+        for(let w of board.walls){
+            if(nextMan.isOn(w)) return false;
+        }
+        // handle check for cached move
+        return true;
     }
 
     mouthPercent(){
@@ -83,13 +94,25 @@ class Pacman{
         for(let i = 0; i <= 1; i++){
             for(let j = 0; j <= 1; j++){
                 let currentX = obj.x + obj.sizeX * i;
-                let currentY = obj.y + obj.sizeY * i;
-                if(this.x <= currentX && currentX <= this.x + this.size &&
-                    this.y <= currentY && currentY <= this.y + this.size){
+                let currentY = obj.y + obj.sizeY * j;
+                if(this.x < currentX && currentX < this.x + this.size &&
+                    this.y < currentY && currentY < this.y + this.size){
+                        return true;
+                }
+            }
+        }
+
+        
+        for(let i = 0; i <= 1; i++){
+            for(let j = 0; j <= 1; j++){
+                let currentX = this.x + this.size * i;
+                let currentY = this.y + this.size * j;
+                if(obj.x < currentX && currentX < obj.x + obj.sizeX &&
+                    obj.y < currentY && currentY < obj.y + obj.sizeY){
                         return true;
                     }
             }
-        }
+        } 
 
         return false;
     }

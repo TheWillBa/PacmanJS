@@ -16,7 +16,7 @@
         this.pellets = pellets;
 
 
-        this.walls = [];
+        this.walls = [new Wall(200, 100, 50, 75)];
      }
 
      // Removes points the pacman is on and returns the number of points cleared

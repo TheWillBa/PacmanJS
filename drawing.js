@@ -23,6 +23,9 @@ function drawGame(game) {
     for(let p of b.pellets){
       drawPellet(p);
     }
+    for(let w of b.walls){
+      drawWall(w);
+    }
   }
 
 
@@ -53,11 +56,18 @@ function drawGame(game) {
 
 
   function drawPellet(p){
-    let pelletSize = blockSize/8;
     ctx.beginPath();
     ctx.fillStyle = "yellow";
-    ctx.rect(p.x, p.y, pelletSize, pelletSize);
+    ctx.rect(p.x, p.y, p.sizeX, p.sizeY);
     ctx.fill();
+  }
+
+  function drawWall(w) {
+    ctx.beginPath();
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 6;
+    ctx.rect(w.x, w.y, w.sizeX, w.sizeY);
+    ctx.stroke();
   }
   
   
