@@ -11,7 +11,7 @@
  */
 
 class Pacman{
-    constructor(x, y){
+    constructor(x, y, board){
         this.x = x;
         this.y = y;
         this.size = blockSize;
@@ -27,13 +27,32 @@ class Pacman{
         this.mouthCount = 0;
         this.mouthIncrement = 0.1;
         this.mouthAngleMax = Math.PI/2;
+
+        this.board = board; // weird
         
     }
 
     tick(game){
-        if(this.canMove(game.board)){
+        if(new Pacman(this.x + this.nextvX, this.y + this.nextvY, this.board).canMove(this.board)){ // look ahead
+            this.vX = this.nextvX;
+            this.vY = this.nextvY;
             this.move();
         }
+        else if(this.canMove(game.board)){
+            this.move();
+        }
+        
+
+        // Screen wrapping 
+
+        if(this.x < -1 * this.size){
+            this.x = this.board.gridX * this.size + this.size;
+        }
+
+        if(this.y < -1 * this.size){
+            this.y = this.board.gridY * this.size + this.size;
+        }
+
     }
 
     canMove(board){
@@ -84,8 +103,17 @@ class Pacman{
     }
 
     setVelocity(xDir,yDir){
-        this.vX = xDir * this.maxVelocity;
-        this.vY = yDir * this.maxVelocity;
+        if(new Pacman(this.x + xDir * this.maxVelocity, this.y + yDir * this.maxVelocity, this.board).canMove(this.board)){
+            this.vX = xDir * this.maxVelocity;
+            this.vY = yDir * this.maxVelocity;
+            this.nextvX = xDir * this.maxVelocity;
+            this.nextvY = yDir * this.maxVelocity;
+        }
+        else{
+            this.nextvX = xDir * this.maxVelocity;
+            this.nextvY = yDir * this.maxVelocity;
+        }
+
     }
 
     isOn(obj){ // obj must have an x, y, and a sizeX, and a sizeY
@@ -95,8 +123,8 @@ class Pacman{
             for(let j = 0; j <= 1; j++){
                 let currentX = obj.x + obj.sizeX * i;
                 let currentY = obj.y + obj.sizeY * j;
-                if(this.x < currentX && currentX < this.x + this.size &&
-                    this.y < currentY && currentY < this.y + this.size){
+                if(this.x <= currentX && currentX <= this.x + this.size &&
+                    this.y <= currentY && currentY <= this.y + this.size){
                         return true;
                 }
             }
@@ -107,8 +135,8 @@ class Pacman{
             for(let j = 0; j <= 1; j++){
                 let currentX = this.x + this.size * i;
                 let currentY = this.y + this.size * j;
-                if(obj.x < currentX && currentX < obj.x + obj.sizeX &&
-                    obj.y < currentY && currentY < obj.y + obj.sizeY){
+                if(obj.x <= currentX && currentX <= obj.x + obj.sizeX &&
+                    obj.y <= currentY && currentY <= obj.y + obj.sizeY){
                         return true;
                     }
             }

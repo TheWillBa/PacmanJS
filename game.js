@@ -12,8 +12,9 @@
 
 class Game{
     constructor(){
-        this.pacman = new Pacman(0, 0);
+
         this.board = new Board();
+        this.pacman = new Pacman(blockSize+1, blockSize+1, this.board);
         this.level = 0;
         this.points = 0;
     }
