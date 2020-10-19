@@ -43,15 +43,6 @@ class Pacman{
         }
         
 
-        // Screen wrapping 
-
-        if(this.x < -1 * this.size){
-            this.x = this.board.gridX * this.size + this.size;
-        }
-
-        if(this.y < -1 * this.size){
-            this.y = this.board.gridY * this.size + this.size;
-        }
 
     }
 

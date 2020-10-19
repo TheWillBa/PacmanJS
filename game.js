@@ -14,7 +14,7 @@ class Game{
     constructor(){
 
         this.board = new Board();
-        this.pacman = new Pacman(blockSize+1, blockSize+1, this.board);
+        this.pacman = new Pacman(this.board.startX, this.board.startY, this.board);
         this.level = 0;
         this.points = 0;
     }
@@ -22,5 +22,18 @@ class Game{
     tick(){
         this.pacman.tick(this);
         this.points += this.board.clearPoints(this.pacman);
+        if(this.levelOver()){
+            this.level++;
+            this.nextLevel();
+        }
+    }
+
+    levelOver(){
+        return this.board.isClear();
+    }
+
+    nextLevel(){
+        this.board = new Board();
+        this.pacman = new Pacman(this.board.startX, this.board.startY, this.board);
     }
 }

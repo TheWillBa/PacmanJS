@@ -1,43 +1,113 @@
 // A class denoting a pacman board
 
-/**
- * Must contain:
- * Pellets
- * Power pellets
- * Walls (general layout)
- */
 
- class Board{
-     constructor(){ // handle templates?
+
+
+
+let temp = [
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+    ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"]]
+
+class Board {
+    constructor() { // handle templates?
         let pellets = [];
-        for(let i = 0; i < 10; i++){
-            pellets.push(new Points(100 - blockSize/2 - blockSize/8, 100 + i * blockSize/2 - blockSize/8, 1, "Pellet")) // testing only
-        }
+        /* for (let i = 0; i < 10; i++) {
+             pellets.push(new Points(104 - blockSize / 2 - blockSize / 8, 100 + i * blockSize / 2 - blockSize / 8, 1, "Pellet")) // testing only
+         }*/
         this.pellets = pellets;
 
 
-        this.walls = [
-            new Wall(0, 0, blockSize, 300),
-            new Wall(0, 0, 300, blockSize),
-            new Wall(2*blockSize+2, 2*blockSize+2, blockSize, 300),
-            new Wall(2*blockSize+2, 2*blockSize+2, 300, blockSize)];
+
+        let temp = [
+            ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"],
+            ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", " ", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", " ", " ", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", " ", " ", " ", "P", " ", " ", " ", " ", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W"],
+            ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", " ", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", " ", " ", "W", "W", " ", " ", " ", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", " ", " ", " ", "W", "W", " ", " ", " ", "W"],
+            ["W", "W", "W", " ", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", " ", "W", "W", "W"],
+            ["W", "W", "W", " ", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", " ", "W", "W", "W"],
+            ["W", " ", " ", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", "W", "W", " ", " ", " ", " ", " ", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W", "W", " ", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", " ", "W"],
+            ["W", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "W"],
+            ["W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W", "W"]]
+
+
+        this.walls = [];
+
+        for (let i = 0; i < temp.length; i++) {
+            for (let j = 0; j < temp[i].length; j++) {
+                if (temp[i][j] === "W") {
+                    let w = new Wall(j * blockSize + j, i * blockSize + i, blockSize, blockSize)
+                    this.walls.push(w);
+                }
+
+                if(temp[i][j] === " "){
+                    let p = new Points(j * blockSize + j + blockSize/2 - blockSize/16, i * blockSize + i + blockSize/2 - blockSize/16, 1, "Pellet");
+                    this.pellets.push(p);
+                }
+
+                if (temp[i][j] === "P") {
+                    let w = new Wall(j * blockSize + j, i * blockSize + i, blockSize, blockSize)
+                    this.startX = j * blockSize + j;
+                    this.startY = i * blockSize + i;
+                }
+            }
+        }
 
         this.gridX = gridX;
         this.gridY = gridY;
-     }
+    }
 
-     // Removes points the pacman is on and returns the number of points cleared
-     clearPoints(pacman){
-         let sum = 0;
-        for(let i = this.pellets.length - 1; i >= 0; i--){
-            if(pacman.isOn(this.pellets[i])){
+    // Removes points the pacman is on and returns the number of points cleared
+    clearPoints(pacman) {
+        let sum = 0;
+        for (let i = this.pellets.length - 1; i >= 0; i--) {
+            if (pacman.isOn(this.pellets[i])) {
                 sum += this.pellets[i].val;
-                this.pellets.splice(i,1);
+                this.pellets.splice(i, 1);
             }
         }
 
         return sum;
-     }
+    }
+
+    isClear(){
+        return this.pellets.length == 0;
+    }
 
 
- }
+}

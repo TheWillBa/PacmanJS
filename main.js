@@ -1,10 +1,10 @@
-const gridX = 15;
-const gridY = 15;
+const gridX = 28;
+const gridY = 31;
 
 const xOffset = 50;
 const yOffset = 50;
 
-const blockSize = 50;
+const blockSize = 25;
 const gridWidthRaw = gridX * blockSize;
 const gridHeightRaw = gridY * blockSize;
 
